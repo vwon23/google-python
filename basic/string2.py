@@ -38,8 +38,15 @@ def verbing(s):
 # This dinner is good!
 def not_bad(s):
   # +++your code here+++
-  return
-
+  find1 = s.find('not')
+  find2 = s.find('bad')
+  if find2 > 0 and find2 > find1:
+    return s[:find1] + 'good' + s[find2+3:]
+  else:
+    return s
+  
+    
+  
 
 # F. front_back
 # Consider dividing a string into two halves.
