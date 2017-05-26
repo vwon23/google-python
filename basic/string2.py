@@ -57,7 +57,13 @@ def not_bad(s):
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
   # +++your code here+++
-  return
+  x = int(len(a)/2)
+  y = int(len(b)/2)
+  if len(a) % 2 != 0:
+    x += 1
+  if len(b) % 2 != 0:
+    y += 1
+  return a[:x] + b[:y] + a[x:] + b[y:]
 
 
 # Simple provided test() function used in main() to print
