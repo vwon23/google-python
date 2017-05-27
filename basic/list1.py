@@ -38,7 +38,15 @@ def match_ends(words):
 # before combining them.
 def front_x(words):
   # +++your code here+++
-  return
+  newlist1 = []
+  newlist2 = []
+  for word in words:
+    if word[0] == 'x':
+      newlist1.append(word)
+    else:
+      newlist2.append(word)
+  newlist3 = sorted(newlist1) + sorted(newlist2)
+  return newlist3
 
 
 
