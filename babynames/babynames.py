@@ -41,8 +41,37 @@ def extract_names(filename):
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
   # +++your code here+++
-  return
+  year_name_rank = []
+  f = open(filename, 'r')
+  text = f.read()
+  match_year = re.search(r'Popularity in (\d\d\d\d)</h3>', text)
+  
+  if match_year:
+    year = match_year.group(1)
+    year_name_rank.append(year)
+  else:
+    sys.stderr.write('Couldn\'t find the year!\n')
+    sys.exit(1)  
+  
+  rank_names_tuple = re.findall(r'<td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>', text)
+  rank_name_dict = {}
+  for rank_name in rank_names_tuple:
+    (rank, boyname, girlname) = rank_name
+    if boyname not in rank_name_dict:
+      rank_name_dict[boyname] = rank
+    if girlname not in rank_name_dict:
+      rank_name_dict[girlname] = rank
+      
+  rank_names = sorted(rank_name_dict.keys())
+  for name in rank_names:
+    year_name_rank.append(name + ' ' + rank_name_dict[name])
+  
+  return year_name_rank
+  
+filename = sys.argv[1]
+print (extract_names(filename))
 
+sys.exit()
 
 def main():
   # This command-line parsing code is provided.
@@ -51,7 +80,7 @@ def main():
   args = sys.argv[1:]
 
   if not args:
-    print 'usage: [--summaryfile] file [file ...]'
+    print ('usage: [--summaryfile] file [file ...]')
     sys.exit(1)
 
   # Notice the summary flag and remove it from args if it is present.
@@ -64,5 +93,5 @@ def main():
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
   
-if __name__ == '__main__':
-  main()
+# if __name__ == '__main__':
+  # main()
