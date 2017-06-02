@@ -38,6 +38,7 @@ print_words() and print_top().
 """
 
 import sys
+import operator
 
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
@@ -64,12 +65,22 @@ def print_words(filename):
   for key in words:
     print (key, word_count[key])
  
-option = sys.argv[1]
-filename = sys.argv[2]
-print (print_words(filename)) 
+
 ###
-#def print_top(filename):
-  
+def get_count(x):
+  return x[1]
+
+
+def sort_count(filename):
+  word_list = word_count_dict(filename)
+  sorted_word_list = sorted(word_list.items(), key=get_count, reverse=True)
+  return sorted_word_list
+
+
+def print_top(filename):
+  words = sort_count(filename)
+  for word in words[:20]:
+    print (word[0], word[1])
     
 
 
