@@ -68,10 +68,10 @@ def extract_names(filename):
   
   return year_name_rank
   
-filename = sys.argv[1]
-print (extract_names(filename))
+# filename = sys.argv[1]
+# print (extract_names(filename))
 
-sys.exit()
+# sys.exit()
 
 def main():
   # This command-line parsing code is provided.
@@ -92,6 +92,18 @@ def main():
   # +++your code here+++
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
-  
-# if __name__ == '__main__':
-  # main()
+  for filename in args:
+    # Make text out of the whole list
+    text = '\n'.join( extract_names(filename))
+
+    if summary:
+      outf = open(filename + '.summary', 'w')
+      outf.write(text + '\n')
+      outf.close()
+    else:
+      print (text)
+  # LAB(end solution)
+	  
+    
+if __name__ == '__main__':
+  main()
